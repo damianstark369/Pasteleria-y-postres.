@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #fffaf5;
+}
+
+/* Transiciones personalizadas para la galería y botones de filtro */
+.btn-filtro {
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-filtro.active {
+    background-color: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
