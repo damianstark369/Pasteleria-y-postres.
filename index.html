@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulce Delicia | Pasteles, Postres y Galletas</title>
+    <!-- Tailwind CSS desde CDN para estilos base -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Iconos de Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-slate-800">
+
+    <!-- Encabezado / Navegación -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-rose-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-rose-500 flex items-center justify-center text-white shadow-md">
+                        <i data-lucide="cake"></i>
+                    </div>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">
+                        Dulce Delicia
+                    </span>
+                </div>
+
+                <!-- Menú de categorías -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+                    <button onclick="filtrarCategoria('todas')" class="hover:text-rose-500 transition-colors">Todas</button>
+                    <button onclick="filtrarCategoria('pasteles')" class="hover:text-rose-500 transition-colors">Pasteles</button>
+                    <button onclick="filtrarCategoria('postres')" class="hover:text-rose-500 transition-colors">Postres</button>
+                    <button onclick="filtrarCategoria('galletas')" class="hover:text-rose-500 transition-colors">Galletas</button>
+                </nav>
+
+                <!-- Carrito -->
+                <button onclick="toggleCarrito()" class="relative p-2.5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 transition-colors">
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-rose-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="relative bg-gradient-to-br from-rose-100 via-amber-50 to-orange-100 py-16 md:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-rose-200/60 text-rose-800 text-sm font-semibold mb-4">
+                ✨ Endulza tus momentos especiales
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+                Los mejores Pasteles, Postres y Galletas artesanales
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
+                Preparados diariamente con ingredientes selectos y de la más alta calidad para consentir tu paladar.
+            </p>
+            <a href="#catalogo" class="inline-flex items-center gap-2 bg-rose-500 hover:bg-rose-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-rose-200 transition-all hover:scale-105">
+                Ver Catálogo <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Filtros y Catálogo -->
+    <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-900">Nuestro Menú Dulce</h2>
+                <p class="text-slate-500 mt-1">Explora nuestras delicias horneadas</p>
+            </div>
+
+            <!-- Botones de filtro -->
+            <div class="flex flex-wrap gap-2">
+                <button onclick="filtrarCategoria('todas')" class="btn-filtro active bg-rose-500 text-white px-5 py-2.5 rounded-full font-medium text-sm transition-all shadow-sm">Todas</button>
+                <button onclick="filtrarCategoria('pasteles')" class="btn-filtro bg-white text-slate-600 hover:bg-rose-50 px-5 py-2.5 rounded-full font-medium text-sm border border-slate-200 transition-all">Pasteles</button>
+                <button onclick="filtrarCategoria('postres')" class="btn-filtro bg-white text-slate-600 hover:bg-rose-50 px-5 py-2.5 rounded-full font-medium text-sm border border-slate-200 transition-all">Postres</button>
+                <button onclick="filtrarCategoria('galletas')" class="btn-filtro bg-white text-slate-600 hover:bg-rose-50 px-5 py-2.5 rounded-full font-medium text-sm border border-slate-200 transition-all">Galletas</button>
+            </div>
+        </div>
+
+        <!-- Grid de productos -->
+        <div id="grid-productos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Carga dinámica con JavaScript -->
+        </div>
+    </main>
+
+    <!-- Panel del Carrito de Compras Lateral -->
+    <div id="carrito-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="carrito-panel" class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl p-6 transform translate-x-full transition-transform duration-300 flex flex-col">
+            <div class="flex items-center justify-between border-b pb-4">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="text-rose-500"></i> Tu Pedido
+                </h3>
+                <button onclick="toggleCarrito()" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div id="carrito-items" class="flex-1 overflow-y-auto py-4 space-y-4">
+                <!-- Lista de items agregados -->
+            </div>
+
+            <div class="border-t pt-4 space-y-4">
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="carrito-total" class="text-rose-600">$0.00</span>
+                </div>
+                <button onclick="realizarPedido()" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 rounded-xl shadow-lg transition-colors">
+                    Confirmar Pedido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de lógica -->
+    <script src="script.js"></script>
+</body>
+</html>
